@@ -1,0 +1,16 @@
+Files Found: 
+E:\Github\Auteur\Assets\Auteur.cs
+E:\Github\Auteur\Assets\Auteur.cs.meta
+E:\Github\Auteur\Assets\AuteurUI.cs
+E:\Github\Auteur\Assets\AuteurUI.cs.meta
+E:\Github\Auteur\Assets\credits.txt
+E:\Github\Auteur\Assets\credits.txt.meta
+E:\Github\Auteur\Assets\Enemby.atr
+E:\Github\Auteur\Assets\Enemby.atr.meta
+E:\Github\Auteur\Assets\ModeSwitcher.cs
+E:\Github\Auteur\Assets\ModeSwitcher.cs.meta
+E:\Github\Auteur\Assets\Output.txt
+E:\Github\Auteur\Assets\Output.txt.meta
+E:\Github\Auteur\Assets\Scenes.meta
+E:\Github\Auteur\Assets\zzzz.atr
+E:\Github\Auteur\Assets\zzzz.atr.meta
