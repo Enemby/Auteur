@@ -71,13 +71,14 @@ public class Auteur : MonoBehaviour
                     writer.WriteLine(author);
                 }
                 writer.WriteLine("");
-                writer.WriteLine("Credits compiled dynamically by Auteur, a author crediting tool made by Enemby.");
+                writer.WriteLine("Credits compiled dynamically by Auteur, an author crediting tool made by Enemby.");
                 writer.Close();
                 WriteToLog("credits.txt has been populated.");
             }
             else
             {
-                WriteToLog("No ATRs Found!Canceled Credits!");
+                WriteToLog("No ATRs Found!");
+                WriteToLog("Canceling credits compile.");
             }
         }
     }

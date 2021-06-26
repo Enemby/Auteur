@@ -2,4 +2,4 @@ Using work by:
 
 Enemby
 
-Credits compiled dynamically by Auteur, a author crediting tool made by Enemby.
+Credits compiled dynamically by Auteur, an author crediting tool made by Enemby.

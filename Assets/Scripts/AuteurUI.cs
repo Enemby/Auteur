@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 public class AuteurUI : MonoBehaviour
 {
     public Text myText;
     public string selectedDir = "";
     public string myAuthor = "";
     public Auteur myInstance;
+    public Text logText;
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
     public class OpenDialogFile
     {
@@ -96,6 +98,7 @@ public class AuteurUI : MonoBehaviour
     private void Start()
     {
         selectedDir = Application.dataPath;
+        InvokeRepeating("updateLog", 2.0f, 1.0f);
     }
     private void Update()
     {
@@ -108,5 +111,10 @@ public class AuteurUI : MonoBehaviour
         {
             myInstance.myAuthor = myAuthor;
         }
+    }
+    public void updateLog()
+    {
+        string[] myLines = File.ReadAllLines("log.txt");
+        logText.text = myLines[myLines.Length-1];
     }
 }
