@@ -1,0 +1,11 @@
+Found Launch Options: 
+-projectpath
+-useHub
+-hubIPC
+-cloudEnvironment
+-hubSessionId
+-accessToken
+Set default path to: E:/Github/Auteur/Assets
+Compiling Credits at: C:\Users\Me\Music
+Output.txt populated
+No ATRs Found!Canceled Credits!

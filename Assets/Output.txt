@@ -15,5 +15,3 @@ E:\Github\Auteur\Assets\Scripts\AuteurUI.cs
 E:\Github\Auteur\Assets\Scripts\AuteurUI.cs.meta
 E:\Github\Auteur\Assets\Scripts\ModeSwitcher.cs
 E:\Github\Auteur\Assets\Scripts\ModeSwitcher.cs.meta
-E:\Github\Auteur\Assets\Scripts\zzzz.atr
-E:\Github\Auteur\Assets\Scripts\zzzz.atr.meta

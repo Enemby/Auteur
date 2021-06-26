@@ -12,18 +12,46 @@ public class Auteur : MonoBehaviour
     void getLaunchOptions()
     {//Stubbed for later
         string[] args = Environment.GetCommandLineArgs();
+        WriteToLog("Found Launch Options: ");
+        for(int i = 0;i < args.Length;i++)
+        {
+            if (args[i].StartsWith("-"))
+            {
+                WriteToLog("" + args[i]);
+            }
+            if(args[i] == "-compilepath")
+            {
+                myPath = args[i] + 1;
+            }
+            if(args[i] == "-authorname")
+            {
+                myAuthor = args[i + 1];
+            }
+            if(args[i] == "-compilecredits")
+            {
+                CompileCredits();
+            }
+            if(args[i] == "-compileauthor")
+            {
+                CompileAuteur();
+            }
+        }
     }
     void Start()
     {
         myPath = Application.dataPath;
+        WriteToLog("reset");
+        getLaunchOptions();
+        WriteToLog("Set default path to: " + myPath);
     }
     public void CompileCredits()
     {//Searches for .atr files, and reads them.
+        WriteToLog("Compiling Credits at: " + myPath);
         SaveSource();
         string myDir = ReadDirectory(myPath, "*.atr");
         string[] myFiles = myDir.Split('\n');
         if (myFiles.Length > 0) { 
-                List<string> atrFiles = new List<string>();
+            List<string> atrFiles = new List<string>();
             foreach (var atr in myFiles)
             {
                 if (atr.Contains(".atr") && !atr.Contains(".meta"))
@@ -33,27 +61,30 @@ public class Auteur : MonoBehaviour
             }
             string[] myReturn = atrFiles.ToArray();
             string[] myCredits = GetCredits(myReturn);
-
-            File.WriteAllText(myPath + "/credits.txt", ""); //Clear file
-            StreamWriter writer = new StreamWriter(myPath + "/credits.txt", true);
-            writer.WriteLine("Using work by: \n");
-            foreach (var author in myCredits)
+            if (myReturn.Length != 0)
             {
-                writer.WriteLine(author);
+                File.WriteAllText(myPath + "/credits.txt", ""); //Clear file
+                StreamWriter writer = new StreamWriter(myPath + "/credits.txt", true);
+                writer.WriteLine("Using work by: \n");
+                foreach (var author in myCredits)
+                {
+                    writer.WriteLine(author);
+                }
+                writer.WriteLine("");
+                writer.WriteLine("Credits compiled dynamically by Auteur, a author crediting tool made by Enemby.");
+                writer.Close();
+                WriteToLog("credits.txt has been populated.");
             }
-            writer.WriteLine("");
-            writer.WriteLine("Credits compiled dynamically by Auteur, a author crediting tool made by Enemby.");
-            writer.Close();
-        }
-        else
-        {
-            File.WriteAllText(myPath + "/credits.txt", ""); //Clear file
-            StreamWriter writer = new StreamWriter(myPath + "/credits.txt", true);
-            writer.WriteLine("No ATRs found!");
+            else
+            {
+                WriteToLog("No ATRs Found!Canceled Credits!");
+            }
         }
     }
     public void CompileAuteur()
     { //Stubbed. Eventually this should create automatic .atr files based on UI info.
+        WriteToLog("Creating .ATR at: " + myPath);
+        WriteToLog("File is: " + myAuthor + ".atr");
         string files = ReadRelativeDirectory(myPath, ".");
         File.WriteAllText(myPath + "/" + myAuthor + ".atr", "");
         StreamWriter writer = new StreamWriter(myPath + "/"+myAuthor+".atr", true);
@@ -90,6 +121,19 @@ public class Auteur : MonoBehaviour
         }
         return dirOutput;
     }
+    void WriteToLog(string toWrite)
+    {
+        if (toWrite == "reset")
+        {
+            File.WriteAllText("log.txt", ""); //Clear the log
+        }
+        else
+        {
+            StreamWriter writer = new StreamWriter("log.txt", true);
+            writer.WriteLine(toWrite);
+            writer.Close();
+        }
+    }
     string ReadRelativeDirectory(string path, string myPattern)
     {
         string dirOutput = "";
@@ -107,6 +151,7 @@ public class Auteur : MonoBehaviour
     }
     void SaveSource()
     { //Write down everything we found and decided
+        WriteToLog("Output.txt populated");
         myOutput = ReadDirectory(myPath, ".");
         File.WriteAllText(myPath + "/Output.txt", ""); //Clear file
         StreamWriter writer = new StreamWriter(myPath + "/Output.txt", true);
