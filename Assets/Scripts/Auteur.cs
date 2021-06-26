@@ -16,7 +16,6 @@ public class Auteur : MonoBehaviour
     void Start()
     {
         myPath = Application.dataPath;
-        CompileCredits();
     }
     public void CompileCredits()
     {//Searches for .atr files, and reads them.
@@ -55,13 +54,14 @@ public class Auteur : MonoBehaviour
     }
     public void CompileAuteur()
     { //Stubbed. Eventually this should create automatic .atr files based on UI info.
+        string files = ReadRelativeDirectory(myPath, ".");
+        File.WriteAllText(myPath + "/" + myAuthor + ".atr", "");
         StreamWriter writer = new StreamWriter(myPath + "/"+myAuthor+".atr", true);
         writer.WriteLine("Credit: " + myAuthor);
         writer.WriteLine("");
         writer.WriteLine("Files: ");
-        writer.Flush();
+        writer.Write(files);
         writer.Close();
-        //TODO: Write relevant files
     }
     string[] GetCredits(string[] theFiles)
     {
@@ -86,6 +86,21 @@ public class Auteur : MonoBehaviour
         foreach (FileInfo f in info)
         {
             dirOutput += f.ToString();
+            dirOutput += "\n";
+        }
+        return dirOutput;
+    }
+    string ReadRelativeDirectory(string path, string myPattern)
+    {
+        string dirOutput = "";
+        DirectoryInfo dir = new DirectoryInfo(path);
+        FileInfo[] info = dir.GetFiles(myPattern, SearchOption.AllDirectories);
+        foreach (FileInfo f in info)
+        {
+            string myFilePath = f.ToString();
+            string[] myFile = myFilePath.Split('\\');
+
+            dirOutput += myFile[myFile.Length-1];
             dirOutput += "\n";
         }
         return dirOutput;
